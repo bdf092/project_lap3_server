@@ -2,4 +2,7 @@ node_modules/
 .DS_Store
 .vscode/
 coverage/
-.env/
+.env
+server/
+client/
+package-lock.json
