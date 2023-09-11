@@ -5,4 +5,4 @@ db.questions.insertMany([
   { type: "multiple", difficulty: "easy", question: "trial", correct_answer: "trialanswer", incorrect_answer1:"Trialanswerwrong", incorrect_answer2: "Trialanswer2", incorrect_answer3: "trialanswer3" }
 ])
 
-
+module.exports = db
