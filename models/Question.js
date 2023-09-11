@@ -1,30 +1,39 @@
+const mongoose = require('mongoose');
 
-const db = require('../db/seed')
+const questionSchema = new mongoose.Schema({
+  id: Number,
+  type: String,
+  difficulty: String,
+  question: String,
+  correct_answer: String,
+  incorrect_answer1: String,
+  incorrect_answer2: String,
+  incorrect_answer3: String,
+});
 
-class Question {
+// Define the 'getAll' method as a static method on the schema
+questionSchema.statics.getAll = async function () {
+  try {
+    const questions = await this.find();
+    return questions;
+  } catch (error) {
+    throw new Error('Error fetching questions: ' + error.message);
+  }
+};
 
-    constructor(data) {
-        this.id = data.id
-        this.type = data.type
-        this.difficulty = data.difficulty
-        this.question = data.question
-        this.correct_answer = data.correct_answer
-        this.incorrect_answer1 = data.incorrect_answer1
-        this.incorrect_answer2 = data.incorrect_answer2
-        this.incorrect_answer3 = data.incorrect_answer3
-
+// Define the 'findById' method as a static method on the schema
+questionSchema.statics.findById = async function (id) {
+  try {
+    const question = await this.findOne({ id });
+    if (!question) {
+      throw new Error('Question not found');
     }
+    return question;
+  } catch (error) {
+    throw new Error('Error finding question: ' + error.message);
+  }
+};
 
-    static async getAll() {
-        const response = await db.query('db.questions.find()')
-        return response.rows.map (q => new Question(q))
-    }
+const Question = mongoose.model('Question', questionSchema);
 
-
-
-
-
-
-}
-
-module.exports= Question;
+module.exports = Question;

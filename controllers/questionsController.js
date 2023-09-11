@@ -12,7 +12,18 @@ async function index(req,res) {
     }
 }
 
+async function show(req,res) {
+    try {
+        const id = req.params._id
+        const question = await Question.findById(id)
+        res.send(question)
+    } catch (err) {
+        res.status(404).send({error: err.message})
+    }
+}
+
 
 module.exports = {
-    index
+    index,
+    show
 }
