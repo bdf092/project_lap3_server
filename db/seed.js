@@ -22,7 +22,7 @@ db.quizzes.insertMany([
         correct_answer: "Producer",
         incorrect_answer1: "Digester",
         incorrect_answer2: "Primary",
-        incorrect_answer3: "Herbivore",
+        incorrect_answer3: "Herbivore ",
       },
       {
         type: "multiple",
