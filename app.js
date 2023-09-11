@@ -1,8 +1,8 @@
 const express = require('express')
 const cors = require('cors')
 const logger = require('morgan')
-const mongoose = require("mongoose")
-const userRouter = require("./routers/userRouter")
+const questionsRoutes = require('./routers/questionsRoutes')
+
 const app = express()
 mongoose.connect('mongodb://localhost:27017/revision_app', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
@@ -23,5 +23,7 @@ app.get('/', (req,res) => {
         description: "Welcome to the revision API"
     })
 })
+
+app.use('/questions', questionsRoutes)
 
 module.exports = app
