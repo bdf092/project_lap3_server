@@ -1,46 +1,42 @@
+const mongoose = require('mongoose');
 
+const userSchema = new mongoose.Schema({
+    username: String,
+    email: String,
+    password: String,
+});
 
-class User {
-    constructor({id, username, email, password}) {
-        this.id = id,
-        this.username = username,
-        this.email = email,
-        this.password = password
+userSchema.statics.getById = async function(id) {
+    const user = await this.findById(id);
+    if (!user) {
+        throw new Error("Unable to locate user.");
     }
+    return user;
+};
 
-    static async getById(id) {
-        const response = await db.query("SELECT * FROM users WHERE id = $1", [id]);
-        if (response.rows.length != 1) {
-            throw new Error("Unable to locate user.");
-        }
-        return new User(response.rows[0]);
+userSchema.statics.getByUsername = async function(username) {
+    const user = await this.findOne({ username });
+    if (!user) {
+        throw new Error("Unable to locate user.");
     }
+    return user;
+};
 
-    static async getByUsername(username) {
-        const response = await db.query("SELECT * FROM users WHERE username = $1", [username]);
-        if (response.rows.length != 1) {
-            throw new Error("Unable to locate user.");
-        }
-        return new User(response.rows[0]);
+userSchema.statics.getByEmail = async function(email) {
+    const user = await this.findOne({ email });
+    if (!user) {
+        throw new Error("Unable to locate user.");
     }
+    return user;
+};
 
-    static async getByEmail(email) {
-        const response = await db.query("SELECT * FROM users WHERE email = $1", [email]);
-        if (response.rows.length != 1) {
-            throw new Error("Unable to locate user.");
-        }
-        return new User(response.rows[0]);
-    }
+userSchema.statics.createUser = async function(data) {
+    const { username, email, password } = data;
+    const newUser = new this({ username, email, password });
+    await newUser.save();
+    return newUser;
+};
 
-
-    static async create(data) {
-        const { username, email, password } = data;
-        let response = await db.query("INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id;",
-            [username, email, password]);
-        const newId = response.rows[0].id;
-        const newUser = await User.getById(newId);
-        return newUser;
-    }
-}
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;
