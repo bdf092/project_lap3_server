@@ -4,11 +4,19 @@ const logger = require('morgan')
 const mongoose = require("mongoose")
 const userRouter = require("./routers/userRouter")
 const quizzesRouter = require("./routers/quizzesRouter")
-//const { connectDB } = require('./db/setup')
 const app = express()
-//connectDB()
-console.log(process.env.DB_URI)
-console.log(process.env.PORT)
+
+mongoose.connect(process.env.DB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    })
+    .then(() => {
+    console.log('DB connection successful');
+    })
+    .catch((err) => {
+    console.error('Error connecting to MongoDB:', err);
+});
+
 
 
 app.use(cors())
