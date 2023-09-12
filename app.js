@@ -3,27 +3,19 @@ const cors = require('cors')
 const logger = require('morgan')
 const mongoose = require("mongoose")
 const userRouter = require("./routers/userRouter")
-const questionRouter = require("./routers/questionRouter")
+const quizzesRouter = require("./routers/quizzesRouter")
 //const { connectDB } = require('./db/setup')
 const app = express()
-
-mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@revision-app.evyi5jx.mongodb.net/`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(() => {
-    console.log('Connected to MongoDB Atlas');
-})
-.catch((error) => {
-    console.error('Error connecting to MongoDB Atlas:', error);
-});
+//connectDB()
+console.log(process.env.DB_URI)
+console.log(process.env.PORT)
 
 
 app.use(cors())
 app.use(express.json())
 app.use(logger('dev'))
 app.use("/users", userRouter)
-app.use("/questions", questionRouter)
+app.use("/quizzes", quizzesRouter)
 app.get('/', (req,res) => {
     res.json({
         name: "Revision API",
