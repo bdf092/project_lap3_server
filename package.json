@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --verbose --runInBand --detectOpenHandles --forceExit",
     "start": "node index.js",
-    "dev": "nodemon -L index.js"
+    "dev": "nodemon -L index.js",
+    "setup-db": "node ./db/setup.js"
   },
   "keywords": [],
   "author": "",

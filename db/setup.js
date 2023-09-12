@@ -19,4 +19,5 @@ const connectDB = () => {
   
 }
 
+connectDB();
 module.exports = { connectDB };
