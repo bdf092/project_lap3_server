@@ -1,31 +1,30 @@
 const mongoose = require("mongoose");
 
-const quizSchema = new mongoose.Schema({
-
+const questionSchema = new mongoose.Schema({
   type: String,
   difficulty: String,
   question: String,
-  correct_answer: String,
-  incorrect_answer1: String,
-  incorrect_answer2: String,
-  incorrect_answer3: String,
+  answer_choices: [String], 
+  correct_answer: String, 
 });
 
-// Define the 'getAll' method as a static method on the schema
+const quizSchema = new mongoose.Schema({
+  title: String,
+  questions: [questionSchema],
+});
+
 quizSchema.statics.getAll = async function () {
   try {
     const quizzes = await this.find();
-    console.log(quizzes)
     return quizzes;
   } catch (error) {
     throw new Error("Error fetching quizzes: " + error.message);
   }
 };
 
-// Define the 'findById' method as a static method on the schema
-quizSchema.statics.findById = async function (id) {
+quizSchema.statics.getById = async function (id) {
   try {
-    const quiz = await this.findOne({ id });
+    const quiz = await this.findById(id);
     if (!quiz) {
       throw new Error("Quiz not found");
     }
@@ -35,32 +34,36 @@ quizSchema.statics.findById = async function (id) {
   }
 };
 
-quizSchema.statics.create = async function (data) {
+quizSchema.statics.createQuiz = async function (data) {
   try {
-    const { question, correct_answer } = data;
-
-    if (!question || !correct_answer) {
-      throw new Error("You need a question and answer to create quiz.");
-    }
-    const newQuiz = new this({ question, correct_answer });
+    const newQuiz = new this(data);
+    console.log(newQuiz)
     await newQuiz.save();
     return newQuiz;
   } catch (error) {
-    throw new Error(error.message);
+    throw new Error("Error creating quiz: " + error.message);
   }
 };
 
-quizSchema.statics.update = async function (data) {
-  const { question, correct_answer } = data;
-  const findQuizz = await this.findOne({ id });
-  if (findQuizz) {
-    if (findQuizz.question) findQuizz.question = question;
-    if (findQuizz.correct_answer)
-      findQuizz.correct_answer = correct_answer;
-    return new this();
+
+quizSchema.statics.updateQuiz = async function (id, data) {
+  try {
+    const quizToUpdate = await this.findById(id);
+
+    if (!quizToUpdate) {
+      throw new Error("Quiz not found");
+    }
+
+    if (data.title) quizToUpdate.title = data.title;
+    if (data.questions) quizToUpdate.questions = data.questions;
+
+    await quizToUpdate.save();
+    return quizToUpdate;
+  } catch (error) {
+    throw new Error("Error updating quiz: " + error.message);
   }
 };
 
-const Quiz = mongoose.model("Quiz", quizSchema);
+const Quiz = mongoose.model('Quiz', quizSchema);
 
 module.exports = Quiz;
