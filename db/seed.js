@@ -12,7 +12,7 @@ const questionsData = [
 ];
 
 // Create documents using the Question model and insert them into the collection
-Question.insertMany(questionsData)
+Question.create(questionsData)
   .then(() => {
     console.log('Data inserted successfully.');
   })

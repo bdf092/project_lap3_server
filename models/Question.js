@@ -34,6 +34,23 @@ questionSchema.statics.findById = async function (id) {
   }
 };
 
+questionSchema.statics.create = async function (data) {
+  try {
+  const { question, correct_answer } = data
+
+    if (!question || !correct_answer) {
+        throw new Error('You need a question and answer to create quiz.')
+    }
+    const newQuestion = new this({ question, correct_answer })
+    await newQuestion.save();
+    return newQuestion
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
+
+
+
 const Question = mongoose.model('Question', questionSchema);
 
 module.exports = Question;
