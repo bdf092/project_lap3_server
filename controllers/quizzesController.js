@@ -13,9 +13,11 @@ async function show(req, res) {
   try {
     const id = req.params.id;
     const quiz = await Quiz.findById(id);
-    res.send(quiz);
+    res.status(200).json(quiz);
+    console.log('Debug Barbara')
+    console.log(quiz)
   } catch (err) {
-    res.status(404).send({ error: err.message });
+    res.status(404).json({ error: err.message });
   }
 }
 
@@ -27,9 +29,9 @@ async function create(req, res) {
       return res.status(422).send({ error: "You need a title, questions, and at least one question with a correct answer to create a quiz." });
     }
     const newQuiz = await Quiz.create(req.body);
-    res.status(201).send(newQuiz);
+    res.status(201).json(newQuiz);
   } catch (err) {
-    res.status(422).send({ error: err.message });
+    res.status(422).json({ error: err.message });
   }
 }
 

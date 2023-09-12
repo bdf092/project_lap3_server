@@ -37,7 +37,6 @@ quizSchema.statics.getById = async function (id) {
 quizSchema.statics.createQuiz = async function (data) {
   try {
     const newQuiz = new this(data);
-    console.log(newQuiz)
     await newQuiz.save();
     return newQuiz;
   } catch (error) {
