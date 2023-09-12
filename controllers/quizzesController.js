@@ -2,8 +2,7 @@ const Quiz = require("../models/Quiz");
 
 async function index(req, res) {
   try {
-    const quizzes = await Quiz.getAll();
-    console.log(quizzes);
+    const quizzes = await Quiz.find();
     res.status(200).json(quizzes);
   } catch (error) {
     res.status(502).json({ error: error.message });
@@ -22,8 +21,10 @@ async function show(req, res) {
 
 async function create(req, res) {
   try {
-    if (!req.body.quiz && !req.body.answer) {
-      throw new Error("You need a Quiz and answer to create quiz.");
+    const { title, questions } = req.body;
+    const hasCorrectAnswer = questions.some((question) => question.correct_answer);
+    if (!title || !questions || !hasCorrectAnswer) {
+      return res.status(422).send({ error: "You need a title, questions, and at least one question with a correct answer to create a quiz." });
     }
     const newQuiz = await Quiz.create(req.body);
     res.status(201).send(newQuiz);
@@ -33,17 +34,22 @@ async function create(req, res) {
 }
 
 async function update(req, res) {
-  // if (req.body._id) {
-  //     res.status(422).send({error: "you need to specify which quiz you want to update"})
-  // }
   try {
-    const id = paraseInt(req.params.id);
+    const id = parseInt(req.params.id);
     const data = req.body;
     const quizToUpdate = await Quiz.findById(id);
-    const updatedQuiz = await quizToUpdate.update(data);
-    res.send(updatedQuiz);
+
+    if (!quizToUpdate) {
+      return res.status(404).send({ error: "Quiz not found" });
+    }
+
+    if (data.title) quizToUpdate.title = data.title;
+    if (data.questions) quizToUpdate.questions = data.questions;
+
+    await quizToUpdate.save();
+    res.send(quizToUpdate);
   } catch (err) {
-    res.send(404).send({ error: err.message });
+    res.status(404).send({ error: err.message });
   }
 }
 
