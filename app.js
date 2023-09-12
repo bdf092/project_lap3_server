@@ -7,7 +7,7 @@ const { connectDB } = require('./db/setup')
 const mongoose = require('mongoose')
 
 const app = express()
-// connectDB()
+connectDB()
 console.log(process.env.DB_URI)
 console.log(process.env.PORT)
 

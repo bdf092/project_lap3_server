@@ -11,13 +11,12 @@ const connectDB = () => {
   })
   .then(() => {
     console.log('DB connection successful');
+    Quiz()
   })
   .catch((err) => {
     console.error('Error connecting to MongoDB:', err);
   });
   
 }
-
-Quiz()
 
 module.exports = { connectDB };
