@@ -1,9 +1,10 @@
 const Quiz = require("../models/Quiz");
 const mongoose = require("mongoose");
-
+require("dotenv").config()
 // clear database here
 const quizData = [
   {
+    id: "1",
     title: "Quiz 1",
     questions: [
     {
@@ -203,8 +204,38 @@ const quizData = [
     },
 ];
 
+const mongoDBUri = process.env.DB_URI; 
+console.log(mongoDBUri)
+
+mongoose
+  .connect(mongoDBUri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log('Connected to MongoDB');
+    clearCollections();
+    seedQuizzes();
+  })
+  .catch((error) => {
+    console.error('Error connecting to MongoDB:', error);
+  });
+
+// Clear existing collections
+const clearCollections = async () => {
+  try {
+    // Drop the collections you want to clear
+    await Quiz.deleteMany({});
+    console.log('Collections cleared successfully.');
+  } catch (error) {
+    console.error('Error clearing collections:', error);
+  }
+};
+
 const seedQuizzes = async () => {
   try {
+    await clearCollections();
+
     await Quiz.insertMany(quizData);
     console.log("Data inserted successfully.");
   } catch (error) {
