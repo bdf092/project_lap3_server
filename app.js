@@ -5,7 +5,7 @@ const mongoose = require("mongoose")
 const userRouter = require("./routers/userRouter")
 const app = express()
 
-mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@revision-app.evyi5jx.mongodb.net/`, {
+mongoose.connect(process.env.DB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
