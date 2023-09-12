@@ -4,20 +4,9 @@ const logger = require('morgan')
 const mongoose = require("mongoose")
 const userRouter = require("./routers/userRouter")
 const app = express()
-
-console.log(process.env.DB_URI);
-
-mongoose.connect(process.env.DB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(() => {
-    console.log('Connected to MongoDB Atlas');
-})
-.catch((error) => {
-    console.error('Error connecting to MongoDB Atlas:', error);
-});
-
+connectDB()
+console.log(process.env.DB_URI)
+console.log(process.env.PORT)
 
 app.use(cors())
 app.use(express.json())
@@ -29,5 +18,7 @@ app.get('/', (req,res) => {
         description: "Welcome to the revision API"
     })
 })
+
+app.use('/questions', questionsRoutes)
 
 module.exports = app
