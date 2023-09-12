@@ -4,12 +4,14 @@ const logger = require('morgan')
 const questionsRoutes = require('./routers/questionsRoutes')
 const userRouter = require('./routers/userRouter')
 const { connectDB } = require('./db/setup')
-// const mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
 const app = express()
-connectDB()
+// connectDB()
+console.log(process.env.DB_URI)
+console.log(process.env.PORT)
 
-// mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@revision-app.evyi5jx.mongodb.net/`, {
+// mongoose.connect(process.env.DB_URI, {
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true
 // })

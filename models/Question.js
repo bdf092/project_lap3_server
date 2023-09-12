@@ -49,7 +49,15 @@ questionSchema.statics.create = async function (data) {
   }
 }
 
-
+questionSchema.statics.update = async function(data) {
+  const { question, correct_answer } = data
+  const findQuestion = await this.findOne({ id });
+  if (findQuestion) {
+    if (findQuestion.question) findQuestion.question = question
+    if (findQuestion.correct_answer) findQuestion.correct_answer = correct_answer
+    return new this
+  }
+}
 
 const Question = mongoose.model('Question', questionSchema);
 
