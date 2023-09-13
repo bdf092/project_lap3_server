@@ -63,6 +63,19 @@ quizSchema.statics.updateQuiz = async function (id, data) {
   }
 };
 
+quizSchema.statics.deleteQuiz = async function () {
+  try {
+    const quiz = await this.findById(id);
+    if (!quiz) {
+      throw new Error('Quiz not found')
+    }
+    await quiz.remove()
+    console.log("Quiz successfully removed.")
+  } catch (err) {
+    throw new Error("Error deleting quiz: " + err.message)
+  }
+}
+
 const Quiz = mongoose.model('Quiz', quizSchema);
 
 module.exports = Quiz;

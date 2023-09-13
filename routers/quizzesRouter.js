@@ -7,6 +7,7 @@ quizzesRouter.get('/', quizzesController.index)
 quizzesRouter.get('/:id', quizzesController.show)
 quizzesRouter.post('/', quizzesController.create)
 quizzesRouter.patch('/:id', quizzesController.update)
+quizzesRouter.delete('/:id', quizzesController.destroy)
 
 
 module.exports = quizzesRouter
