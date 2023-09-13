@@ -425,131 +425,131 @@ const quizData = [
       },
     ],
   },
-  {
-    title: "Quiz 5",
-    questions: [
-      {
-        type: "multiple_choice",
-        difficulty: "easy",
-        question: "A voyage on which ship inspired Darwin to write *On the Origin of Species by Means of Natural Selection* (1859)?",
-        correct_answer: "HMS *Beagle*",
-        answer_choices: [
-          "HMS *Beagle*",
-          "HMS *Poodle*",
-          "HMS *Terrier*",
-          "HMS *Spaniel*"
-        ],
-      },
-      {
-        type: "multiple_choice",
-        difficulty: "medium",
-        question: "What is another name for the so-called sea wasp, which can be extremely dangerous to humans?",
-        correct_answer: "Box jellyfish",
-        answer_choices: [
-          "Stingray",
-          "Cuttlefish",
-          "Box jellyfish",
-          "Dragonfish"
-        ],
-      },
-      {
-        type: "multiple_choice",
-        difficulty: "medium",
-        question: "Which of these crabs is largest?",
-        correct_answer: "Tasmanian crab",
-        answer_choices: [
-          "Alaskan king crab",
-          "Hermit crab",
-          "Robber crab",
-          "Tasmanian crab"
-        ],
-      },
-      {
-        type: "multiple_choice",
-        difficulty: "easy",
-        question: "Which lizard jumps into water to escape predators?",
-        correct_answer: "Iguana",
-        answer_choices: [
-          "Gecko",
-          "Chameleon",
-          "Iguana",
-          "Anole"
-        ],
-      },
-      {
-        type: "multiple_choice",
-        difficulty: "medium",
-        question: "What is a cowrie?",
-        correct_answer: "A marine snail",
-        answer_choices: [
-          "A species of sponge",
-          "A small cow",
-          "A flower",
-          "A marine snail"
-        ],
-      },
-      {
-        type: "multiple_choice",
-        difficulty: "medium",
-        question: "What is a sea cucumber?",
-        correct_answer: "A marine invertebrate",
-        answer_choices: [
-          "A type of vegetable",
-          "A marine invertebrate",
-          "A fish",
-          "A seaweed"
-        ],
-      },
-      {
-        type: "multiple_choice",
-        difficulty: "hard",
-        question: "What is the largest geographic biotic unit?",
-        correct_answer: "Biome",
-        answer_choices: [
-          "Taxon",
-          "Biota",
-          "Biome",
-          "Region"
-        ],
-      },
-      {
-        type: "multiple_choice",
-        difficulty: "medium",
-        question: "What is the maintenance of a relatively constant internal environment known as?",
-        correct_answer: "Homeostasis",
-        answer_choices: [
-          "Thermofibrillation",
-          "Osteopathy",
-          "Homeostasis",
-          "Homing instinct"
-        ],
-      },
-      {
-        type: "multiple_choice",
-        difficulty: "easy",
-        question: "Embryos grow into the shape of a complete organism via the differentiation of cells, tissues, and organs. What is this process called?",
-        correct_answer: "Morphogenesis",
-        answer_choices: [
-          "Morphogenesis",
-          "Teratogenesis",
-          "Orthogenesis",
-          "Embryogenesis"
-        ],
-      },
-      {
-        type: "multiple_choice",
-        difficulty: "hard",
-        question: "A squid and an octopus are both cephalopods with eight arms, but how is a squid different from an octopus?",
-        correct_answer: "A squid has two long tentacles in addition to the eight arms",
-        answer_choices: [
-          "A squid has no mouth",
-          "A squid has two long tentacles in addition to the eight arms",
-          "A squid has only six arms instead of eight",
-          "A squid has a shell"
-        ],
-      }
-    ]
-  }
+  // {
+  //   title: "Quiz 5",
+  //   questions: [
+  //     {
+  //       type: "multiple_choice",
+  //       difficulty: "easy",
+  //       question: "A voyage on which ship inspired Darwin to write *On the Origin of Species by Means of Natural Selection* (1859)?",
+  //       correct_answer: "HMS *Beagle*",
+  //       answer_choices: [
+  //         "HMS *Beagle*",
+  //         "HMS *Poodle*",
+  //         "HMS *Terrier*",
+  //         "HMS *Spaniel*"
+  //       ],
+  //     },
+  //     {
+  //       type: "multiple_choice",
+  //       difficulty: "medium",
+  //       question: "What is another name for the so-called sea wasp, which can be extremely dangerous to humans?",
+  //       correct_answer: "Box jellyfish",
+  //       answer_choices: [
+  //         "Stingray",
+  //         "Cuttlefish",
+  //         "Box jellyfish",
+  //         "Dragonfish"
+  //       ],
+  //     },
+  //     {
+  //       type: "multiple_choice",
+  //       difficulty: "medium",
+  //       question: "Which of these crabs is largest?",
+  //       correct_answer: "Tasmanian crab",
+  //       answer_choices: [
+  //         "Alaskan king crab",
+  //         "Hermit crab",
+  //         "Robber crab",
+  //         "Tasmanian crab"
+  //       ],
+  //     },
+  //     {
+  //       type: "multiple_choice",
+  //       difficulty: "easy",
+  //       question: "Which lizard jumps into water to escape predators?",
+  //       correct_answer: "Iguana",
+  //       answer_choices: [
+  //         "Gecko",
+  //         "Chameleon",
+  //         "Iguana",
+  //         "Anole"
+  //       ],
+  //     },
+  //     {
+  //       type: "multiple_choice",
+  //       difficulty: "medium",
+  //       question: "What is a cowrie?",
+  //       correct_answer: "A marine snail",
+  //       answer_choices: [
+  //         "A species of sponge",
+  //         "A small cow",
+  //         "A flower",
+  //         "A marine snail"
+  //       ],
+  //     },
+  //     {
+  //       type: "multiple_choice",
+  //       difficulty: "medium",
+  //       question: "What is a sea cucumber?",
+  //       correct_answer: "A marine invertebrate",
+  //       answer_choices: [
+  //         "A type of vegetable",
+  //         "A marine invertebrate",
+  //         "A fish",
+  //         "A seaweed"
+  //       ],
+  //     },
+  //     {
+  //       type: "multiple_choice",
+  //       difficulty: "hard",
+  //       question: "What is the largest geographic biotic unit?",
+  //       correct_answer: "Biome",
+  //       answer_choices: [
+  //         "Taxon",
+  //         "Biota",
+  //         "Biome",
+  //         "Region"
+  //       ],
+  //     },
+  //     {
+  //       type: "multiple_choice",
+  //       difficulty: "medium",
+  //       question: "What is the maintenance of a relatively constant internal environment known as?",
+  //       correct_answer: "Homeostasis",
+  //       answer_choices: [
+  //         "Thermofibrillation",
+  //         "Osteopathy",
+  //         "Homeostasis",
+  //         "Homing instinct"
+  //       ],
+  //     },
+  //     {
+  //       type: "multiple_choice",
+  //       difficulty: "easy",
+  //       question: "Embryos grow into the shape of a complete organism via the differentiation of cells, tissues, and organs. What is this process called?",
+  //       correct_answer: "Morphogenesis",
+  //       answer_choices: [
+  //         "Morphogenesis",
+  //         "Teratogenesis",
+  //         "Orthogenesis",
+  //         "Embryogenesis"
+  //       ],
+  //     },
+  //     {
+  //       type: "multiple_choice",
+  //       difficulty: "hard",
+  //       question: "A squid and an octopus are both cephalopods with eight arms, but how is a squid different from an octopus?",
+  //       correct_answer: "A squid has two long tentacles in addition to the eight arms",
+  //       answer_choices: [
+  //         "A squid has no mouth",
+  //         "A squid has two long tentacles in addition to the eight arms",
+  //         "A squid has only six arms instead of eight",
+  //         "A squid has a shell"
+  //       ],
+  //     }
+  //   ]
+  // }
   
 ];
 
