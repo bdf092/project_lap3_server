@@ -21,3 +21,6 @@
 20230913	12:10:42	a50eac8b-754e-4afc-a8dd-35fb0badde9a	GET	undefined	/refresh
 20230913	12:16:41	9644e67b-fd99-4e5f-8196-c30c37967614	POST	undefined	/auth
 20230913	12:17:02	a2d7d88b-5d35-45c9-a11a-5ad98631c9e1	GET	undefined	/refresh
+20230913	13:57:07	5bd6eb8f-0743-4f6f-a848-7c7b2455fdf0	POST	undefined	/register
+20230913	13:57:47	6c37a3ce-ce26-46f5-bfd1-e793e0421f30	POST	undefined	/register
+20230913	13:58:02	3e4595de-0953-424a-ac5e-86a362cea610	POST	undefined	/auth
