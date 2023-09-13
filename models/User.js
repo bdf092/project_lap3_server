@@ -1,11 +1,28 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
-    username: String,
-    email: String,
-    password: String,
+const Schema = mongoose.Schema;
+
+const userSchema = new Schema({
+    username: {
+        type: String,
+        required: true
+    },
+    roles: {
+        User: {
+            type: Number,
+            default: 2001
+        },
+        Editor: Number,
+        Admin: Number
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    refreshToken: String
 });
 
+/*
 userSchema.statics.getById = async function(id) {
     const user = await this.findById(id);
     if (!user) {
@@ -36,6 +53,7 @@ userSchema.statics.createUser = async function(data) {
     await newUser.save();
     return newUser;
 };
+*/
 
 const User = mongoose.model('User', userSchema);
 
