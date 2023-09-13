@@ -13,9 +13,7 @@ async function show(req, res) {
   try {
     const id = req.params.id;
     const quiz = await Quiz.findById(id);
-    res.status(200).json(quiz);
-    console.log('Debug Barbara')
-    console.log(quiz)
+    res.status(200).json(quiz)
   } catch (err) {
     res.status(404).json({ error: err.message });
   }
@@ -41,6 +39,8 @@ async function update(req, res) {
     const data = req.body;
     const quizToUpdate = await Quiz.findById(id);
 
+ 
+
     if (!quizToUpdate) {
       return res.status(404).send({ error: "Quiz not found" });
     }
@@ -49,7 +49,7 @@ async function update(req, res) {
     if (data.questions) quizToUpdate.questions = data.questions;
 
     await quizToUpdate.save();
-    res.send(quizToUpdate);
+    res.status(200).res.json(quizToUpdate);
   } catch (err) {
     res.status(404).send({ error: err.message });
   }

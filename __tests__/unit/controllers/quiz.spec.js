@@ -1,5 +1,6 @@
 const quizController = require('../../../controllers/quizzesController')
 const Quiz = require('../../../models/Quiz');
+const { update } = require('../../../controllers/quizzesController'); 
 
 const mockSend = jest.fn();
 const mockJson = jest.fn();
@@ -69,6 +70,41 @@ describe('quiz controller', () => {
       expect(mockStatus).toHaveBeenCalledWith(201);
       expect(mockJson).toHaveBeenCalledWith(new Quiz(testQuiz));
     })
+  });
+
+
+  it('updates a quiz with a 200 status code', async () => {
+    // Mock Quiz.findById to return a quiz
+    const quizToUpdate = {
+      _id: "6502216f0cc0aba5d5a78b95",
+      title: 'Old Title',
+      questions: [],
+    };
+    jest.spyOn(Quiz, 'findById').mockResolvedValue(new Quiz(quizToUpdate));
+
+    // Mock the save method of the found quiz
+    const saveMock = jest.fn().mockResolvedValue(new Quiz(quizToUpdate));
+    quizToUpdate.save = saveMock;
+
+    // Mock the request object
+    const mockReq = {
+      params: { id: '6502216f0cc0aba5d5a78b95' },
+      body: { title: 'New Title', questions: [] },
+    };
+
+    // Call the update function
+    await update(mockReq, mockRes);
+
+    // Assertions
+    expect(mockStatus).toHaveBeenCalledWith(200);
+    expect(mockJson).toHaveBeenCalledWith(new Quiz(quizToUpdate));
+
+    // Ensure that Quiz.findById was called with the correct ID
+    expect(Quiz.findById).toHaveBeenCalledWith('6502216f0cc0aba5d5a78b95');
+
+    // Ensure that the quiz's save method was called with the updated data
+    expect(saveMock).toHaveBeenCalledWith();
+    expect(quizToUpdate.title).toBe('New Title');
   });
 
   

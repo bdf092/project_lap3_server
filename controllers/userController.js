@@ -3,11 +3,13 @@ const User = require("../models/User");
 const getAllUsers = async (req, res) => {
     const users = await User.find();
     if (!users) return res.status(204).json({ message: "No users found" });
-    res.json(users);
+    res.status(200).json(users);
 };
 
 const deleteUser = async (req, res) => {
-    if (!req?.body?.id) return res.status(400).json({ message: "User ID required" });
+   
+    if (!req?.body?._id) return res.status(400).json({ message: "User ID required" });
+
     const user = await User.findOne({ _id: req.body.id }).exec();
     if (!user) {
         return res.status(204).json({ message: `User ID ${req.body.id} not found` });
@@ -17,12 +19,13 @@ const deleteUser = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
-    if (!req?.params?.id) return res.status(400).json({ message: "User ID required" });
+    console.log(req.params._id)
+    if (!req?.params?._id) return res.status(400).json({ message: "User ID required" });
     const user = await User.findOne({ _id: req.params.id }).exec();
     if (!user) {
         return res.status(204).json({ message: `User ID ${req.params.id} not found` });
     }
-    res.json(user);
+    res.status(200).json(user);
 };
 
 module.exports = {

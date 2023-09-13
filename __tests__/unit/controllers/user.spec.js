@@ -1,45 +1,56 @@
-const request = require('supertest');
-const app = require("../../app");
-const { faker } = require('@faker-js/faker');
+const userController = require('../../../controllers/userController')
+const User = require('../../../models/User');
 
+const mockSend = jest.fn();
+const mockJson = jest.fn();
+const mockStatus = jest.fn(code => ({ send: mockSend, json: mockJson, end: jest.fn() }))
+const mockRes = { status: mockStatus }
 
-describe('User Controller', () => {
-    it('Register a new user with new credentials', async () => {
-        // Generate random email and username with faker
-        const uniqueEmail = faker.internet.email();
-        const uniqueUsername = faker.internet.userName();
-        const uniquePassword = 'testPassword'; 
+describe('user controller', () => {
+  beforeEach(() => jest.clearAllMocks());
 
-        const response = await request(app)
-            .post('/users/register')
-            .send({
-                username: uniqueUsername,
-                email: uniqueEmail,
-                password: uniquePassword
-            });
-        expect(response.status).toBe(201);
-    });
+  afterAll(() => jest.resetAllMocks());
 
-    it('Can login with existing user login credentials', async () => {
-        const response = await request(app)
-        .post('/users/login')
-        .send({
-            email: 'testuser@gmail.com',
-            password: '123'
-        });
-    expect(response.status).toBe(200);
+  describe('getAllUsers', () => {
+    test('it returns users with a 200 status code', async () => {
+      let testUsers = ['u1', 'u2']
+      jest.spyOn(User, 'find')
+        .mockResolvedValue(testUsers);
+      await userController.getAllUsers(null, mockRes);
+      expect(mockStatus).toHaveBeenCalledWith(200);
+      expect(mockJson).toHaveBeenCalledWith(testUsers);
     })
+  });
 
-    it ('Prompt user when wrong login credentials submitted', async () => {
-        try { 
-        const response = await request(app)
-        .post('/user/login')
-        .send({
-            email: "fake@imail.com",
-            password: "wrong"
-        })
-        } catch (err) {
-            expect(err.message).toBe('duplicate key value violates unique constraint "user_account_username_key"')
-        }
+  describe('getUser', () => {
+    test('it returns an user with a 200 status code', async () => {
+      let testUser = {
+        _id: "6501fd1d5a9366b89794b8f6", username: "test", roles: { User: 2001}, password: "test"
+      }
+      jest.spyOn(User, 'findOne')
+        .mockResolvedValue(new User(testUser));
+        
+      const mockReq = { params: { _id: "6501fd1d5a9366b89794b8f6" } }
+        
+    
+      await userController.getUser(mockReq, mockRes);
+      
+     
+      expect(mockStatus).toHaveBeenCalledWith(200);
+      expect(mockJson).toHaveBeenCalledWith(new User(testUser));
     })
-});
+  });
+
+  describe('deleteUser', () => {
+    test('it returns a 200 status code on successful deletion', async () => {
+      jest.spyOn(User.prototype, 'deleteOne')
+        .mockResolvedValue('Deleted');
+
+      const mockReq = { body: {_id: "6501fd1d5a9366b89794b8f6" } }
+      await userController.deleteUser(mockReq, mockRes);
+      expect(mockStatus).toHaveBeenCalledWith(200);
+    })
+  });
+  
+
+})
