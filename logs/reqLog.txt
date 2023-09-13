@@ -24,3 +24,5 @@
 20230913	13:57:07	5bd6eb8f-0743-4f6f-a848-7c7b2455fdf0	POST	undefined	/register
 20230913	13:57:47	6c37a3ce-ce26-46f5-bfd1-e793e0421f30	POST	undefined	/register
 20230913	13:58:02	3e4595de-0953-424a-ac5e-86a362cea610	POST	undefined	/auth
+20230913	16:10:37	80b58c88-e56f-4cc6-8b7e-2a0b4769c0e0	POST	undefined	/register
+20230913	16:10:45	62abb1d0-30af-417f-8574-55283f464ed0	POST	undefined	/auth
