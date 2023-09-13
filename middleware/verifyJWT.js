@@ -1,20 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const verifyJWT = (req, res, next) => {
-    const unauthenticatedRoutes = [
-        "/",
-        "/quizzes",
-        "/users",
-        "/register",
-        "/auth",
-        "/refresh",
-        "/logout",
-    ];
-
-    // Check if the current route does not require JWT verification
-    if (unauthenticatedRoutes.includes(req.path)) {
-        return next(); // Skip JWT verification for unauthenticated routes
-    }
+    return next(); // Skip JWT verification for unauthenticated routes
 
     const authHeader = req.headers.authorization || req.headers.Authorization;
     if (!authHeader?.startsWith("Bearer ")) return res.sendStatus(401);
