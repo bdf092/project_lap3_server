@@ -71,6 +71,27 @@ describe('quiz controller', () => {
     })
   });
 
+  describe('update', () => {
+    test('it returns a quiz with a 200 status code', async () => {
+      let testQuiz = {
+        _id: "6500dfa0e8e1ebcbfc8ca26e", title: "test",  questions: []
+      }
+      jest.spyOn(Quiz, 'findById')
+        .mockResolvedValue(new Quiz(testQuiz));
+
+        const saveMock = jest.fn().mockResolvedValue(new Quiz(testQuiz));
+
+        testQuiz.save = saveMock;
+
+      const mockReq = { params: { _id: "6500dfa0e8e1ebcbfc8ca26e" }, body : { title: "New Title", questions: []} }
+    
+      await quizController.update(mockReq, mockRes);
+     
+      expect(mockStatus).toHaveBeenCalledWith(200);
+      expect(mockJson).toHaveBeenCalledWith(new Quiz(testQuiz));
+    })
+  });
+
   
 
 })
