@@ -1,3 +1,0 @@
-20230913	11:33:07	cd6695ea-4166-4216-88b7-25fcca0b1f9c	Error: ENOENT: no such file or directory, stat 'C:\Users\ED\Development\LaFosse\lap3\finalproject3\project_lap3_server\views\index.html'
-20230913	17:15:22	d7f2c597-f1f4-4635-b3b3-c2ca007b5302	Error: ENOENT: no such file or directory, stat 'C:\Users\dunca\Desktop\lfa\lap3\project\project_lap3_server\views\404.html'
-20230913	17:15:41	9673b29c-98b1-498b-8cc8-82431ebeeeae	Error: ENOENT: no such file or directory, stat 'C:\Users\dunca\Desktop\lfa\lap3\project\project_lap3_server\views\404.html'
