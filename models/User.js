@@ -11,7 +11,11 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    refreshToken: String
+    refreshToken: String,
+    quizzesPlayed: {
+        type: Number,
+        default: 0
+    }
 });
 
 /*

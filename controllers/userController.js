@@ -32,8 +32,28 @@ const getUser = async (req, res) => {
   res.status(200).json(user);
 };
 
+const updateQuizzesPlayed = async (req, res) => {
+  if (!req?.params?.id)
+    return res.status(400).json({ message: "User ID required" });
+  try {
+    const user = await User.findOne({ _id: req.params.id });
+      if (!user) {
+          return res.status(404).json({ message: "User not found" });
+      }
+      
+      user.quizzesPlayed += 1;
+      await user.save();
+      
+      res.status(200).json({ message: "Quiz completed successfully" });
+  } catch (error) {
+      console.error("Error completing quiz:", error);
+      res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports = {
   getAllUsers,
   deleteUser,
   getUser,
+  updateQuizzesPlayed
 };
